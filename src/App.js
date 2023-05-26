@@ -1,25 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react'
+import OperationSelection from './components/OperationSelection';
+import ArgumentsCreation from './components/ArgumentsCreation';
 
-function App() {
+const App = () => {
+
+  //Arguments List creation and removal
+  const [argumentsList, setArgumentsList] = useState([{ name: "", value: "" }]);
+
+  //Result Holder
+  const [calculatedResult, setCalculatedResult] = useState(undefined);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <>
+      {/* arguments creation */}
+      <ArgumentsCreation argumentsList={argumentsList} setArgumentsList={setArgumentsList} />
+
+      <hr />
+
+      {/* Operations */}
+      <OperationSelection argumentsList={argumentsList} setCalculatedResult={setCalculatedResult} />
+
+      <hr />
+
+      {/* Displaying Result */}
+      <p>{`Result: ${calculatedResult}`}</p>
+    </>
+  )
 }
 
-export default App;
+export default App
